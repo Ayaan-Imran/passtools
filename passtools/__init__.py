@@ -2,13 +2,20 @@ import getpass
 import sys
 import hashlib
 import secrets
-import os
 
 __doc__ = "Passtools is a package that allows you to use tools with which you can do all kinds of stuff with passwords"
 __version__ = "0.1.0"
 __author__ = "Ayaan Imran Saleem"
 
 def passhash(prompt:str, hash_type:str="sha256", hash_strength:int=1):
+    """
+    Function to hash a string
+    :param prompt: String to hash
+    :param hash_type: The hash type of the hash provided in this function. Hash types included: sha256, sha1, sha224, sha384, sha512, md5
+    :param hash_strength: How strong you want your hash to be. 1 is default and is the normal kind of hash. The more the hash is, the longer it takes to execute the function
+    :return: Hashed string
+    """
+
     if hash_type == "sha256":
         hash = ""
         for _ in range(hash_strength):
@@ -42,6 +49,16 @@ def passhash(prompt:str, hash_type:str="sha256", hash_strength:int=1):
     return hash
 
 def passask(prompt:str="password: ", do_hash:bool=True, hashtype="sha256", hashstrength:int=1):
+    """
+    Function to ask for passwords withough echoing.
+    NOTE: If you use terminals like git bash or pycharm terminal, then it will echo the password. This is done because "not echoing" will cause the terminal and the whole program to crash and fail
+    :param prompt: The text shown to user before it shows the input box
+    :param do_hash: If you don't want the output to be hashed, then pass in False. Default is True
+    :param hashtype: The hash type of the hash provided in this function. Hash types included: sha256, sha1, sha224, sha384, sha512, md5
+    :param hashstrength: How strong you want your hash to be. 1 is default and is the normal kind of hash. The more the hash is, the longer it takes to execute the function
+    :return: The password given by the user. If hash is turned on, then it will hash the password and return.
+    """
+
     if not sys.stdin.isatty():
         password = input(prompt)
 
@@ -57,6 +74,13 @@ def passask(prompt:str="password: ", do_hash:bool=True, hashtype="sha256", hashs
     return password
 
 def passgen(length:int = 10, caplock="mix"):
+    """
+    Function to generate strong random passwords
+    :param length: The length of the password
+    :param caplock: If you want your string to be uppercase, then pass in True. Otherwise False. If you want uppercase and lowercase, then pass in 'mix'. 'mix' is default
+    :return: Your randomly generated password
+    """
+
     # Define the letter, numbers and symbols
     letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "h", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t",
                "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O",
@@ -105,7 +129,7 @@ def passgen(length:int = 10, caplock="mix"):
     # Return the result
     return final_result
 
-def passhashcracker(hash:str, wordlist:str, hash_type:str):
+def passHashCracker(hash:str, wordlist:str, hash_type:str):
     """
     Function to crack hashes using brute force
     :param hash: Hash to crack
@@ -200,7 +224,7 @@ def passhashcracker(hash:str, wordlist:str, hash_type:str):
 
     return (cracked, cracked_hash)
 
-def hashfile(filename:str, hash_type:str="sha256"):
+def hashFile(filename:str, hash_type:str="sha256"):
     """
     Function to hash a file
     :param filename: Name of a valid filename
