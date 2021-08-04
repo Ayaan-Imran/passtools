@@ -49,7 +49,7 @@ def passhash(prompt:str, hash_type:str="sha256", hash_strength:int=1):
 
     return hash
 
-def passask(prompt:str="password: ", do_hash:bool=True, hashtype="sha256", hashstrength:int=1):
+def passask(prompt:str="password: ", do_hash:bool=True, hashtype="sha256", hashstrength:int=1, echo:bool=False):
     """
     Function to ask for passwords withough echoing.
     NOTE: If you use terminals like git bash or pycharm terminal, then it will echo the password. This is done because "not echoing" will cause the terminal and the whole program to crash and fail
@@ -57,10 +57,11 @@ def passask(prompt:str="password: ", do_hash:bool=True, hashtype="sha256", hashs
     :param do_hash: If you don't want the output to be hashed, then pass in False. Default is True
     :param hashtype: The hash type of the hash provided in this function. Hash types included: sha256, sha1, sha224, sha384, sha512, md5
     :param hashstrength: How strong you want your hash to be. 1 is default and is the normal kind of hash. The more the hash is, the longer it takes to execute the function
+    :param echo: If set to True, then it will show the password while entering. Default is False (Meaning that it will not show the password to the user unless the terminal doesn't support it, e.g. Pycharm Terminal, Git Bash)
     :return: The password given by the user. If hash is turned on, then it will hash the password and return.
     """
 
-    if not sys.stdin.isatty():
+    if (not sys.stdin.isatty()) or (echo == True):
         password = input(prompt)
 
         if do_hash == True:
