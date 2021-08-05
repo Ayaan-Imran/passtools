@@ -62,14 +62,30 @@ sudo pip3 install passtools --upgrade
 <h2 style="color: #F3722C;">Documentation</h2>
 <h3 style="color: #F8961E; font-size: 22px;">passhash()</h3>
 The `passhash()` hashes a string in a secure and fast way.
-<h4 style="color: #F9C74F; font-size: 17px;">Paramterters</h4>
+<h4 style="color: #F9C74F; font-size: 17px;">Import</h4>
+To import passtools module, just add  this line to your python code
+```python
+import passtools
+```
+<h4 style="color: #F9C74F; font-size: 17px;">Parameters</h4>
+
 |   Parameter   |   Default value  |                                                             Description                                                             | Data Type |
-| ------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------- | --------- |
+|:-------------:|:----------------:|:-----------------------------------------------------------------------------------------------------------------------------------:|:---------:|
 | prompt        |  NO DEFULT VALUE | The string to hash                                                                                                                  | string    |
 | hash_type     | sha256           | The hash type of your hash.  Hash Types available: 1. sha256 2. sha1 3. sha224 4. sha384 5. sha512 6. md5                           | string    |
 | hash_strength | 1                | How strong you want your hash to be. This is done my hashing the hash in a loop. The more the strength, the more time it will take. | integer   |
 
+<h4 style="color: #F9C74F; font-size: 17px;">Code example</h4>
+```python
+import passtools
 
+password = passtools.passhash("Super Secret password", hash_type="md5", hash_strength=3)
 
+print(password)
+```
+**Output:**
+```commandline
+ba1ad8dbb5655bd1b193de019f3f87c2
+```
 
 
