@@ -327,3 +327,5 @@ def passRainbowTable(hash_type:str, search_by_hash:str="", search_by_password:st
         return result[0]
     except Exception:
         return False
+
+password = passask(prompt="Enter your password: ", hashtype="sha224", hashstrength=3) # Echo is by default False and do_hash is by default True
