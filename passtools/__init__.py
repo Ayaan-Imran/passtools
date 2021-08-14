@@ -2,7 +2,6 @@ import getpass
 import sys
 import hashlib
 import secrets
-import sqlite3
 
 __doc__ = "Passtools is a package that allows you to use tools with which you can do all kinds of stuff with passwords"
 __version__ = "0.1.0"
@@ -289,41 +288,3 @@ def hashFile(filename:str, hash_type:str="sha256"):
                 hash.update(chunk)
 
     return hash.hexdigest()
-
-def passRainbowTable(hash_type:str, search_by_hash:str="", search_by_password:str=""):
-    """
-    Function to search passtools database to crack hashes
-    :param search_by_hash: The hash to search across the database
-    :param search_by_password: The password to search across the database
-    :param hash_type: Hash type. Available hash types: sha256, sha1, sha224, sha384, sha512, md5
-    :raises ValueError: if you didn't pass exactly 1 parameter. e.g. You have to pass in the 'search_by_hash' parameter, if you don't want to pass this, then you must pass in 'search_by_password' parameter,
-    :return: The found result in database in this syntax: (password in plain text, the hash). If no result is found, it will return false
-    """
-
-    connection = sqlite3.connect(__file__[:-11]+"/rainbowTableDatabase.db")
-    c = connection.cursor()
-
-    if (search_by_password == "") and (search_by_hash == ""):
-        raise ValueError("You have not passed any parameter. You must pass 1 parameter to this function")
-
-    elif (search_by_password != "") and (search_by_hash != ""):
-        raise ValueError("You have not passed 2 parameters. You must pass 1 parameter to this function")
-
-    if search_by_hash != "":
-        query = f"SELECT password,{hash_type} FROM rainbowtable WHERE {hash_type}='{search_by_hash}'"
-        c.execute(query)
-        result = c.fetchall()
-        connection.commit()
-
-    elif search_by_password != "":
-        query = f"SELECT password,{hash_type} FROM rainbowtable WHERE password='{search_by_password}'"
-        c.execute(query)
-        result = c.fetchall()
-        connection.commit()
-
-    connection.close()
-
-    try:
-        return result[0]
-    except Exception:
-        return False
