@@ -1,61 +1,61 @@
-<h1 style="color: #f94144;">Passtools</h1>
+# Passtools
 GitHub repo for the project "passtools" on pypi. This package allows tools that will provide you with functionality to do all kinds of stuff with passwords.
 
-<h2 style="color: #F3722C;">About this version</h2>
+## About this version
 - Version = 0.1.0
 - This version contains the very core of this package
 
-<h2 style="color: #F3722C;">Installing and Updating passtools</h2>
-<h3 style="color: #F8961E; font-size: 22px;">Installation process</h3>
+## Installing and Updating passwordtools
+### Installation process
 
 <h4 style="color: #F9C74F; font-size: 17px;">To install  or upgrade passtools on windows</h4>
-**To install passtools:**
+**To install passwordtools:**
 1. Open _cmd_ or _powershell_
 2. Run this command
 ```commandline
-pip install passtools
+pip install passwordtools
 ```
 3. You have successfully installed it!
 
-**To upgrade passtools:**
+**To upgrade passwordtools:**
 1. Open _cmd_ or _powershell_
 2. Run this command
 ```commandline
-pip install passtools --upgrade
+pip install passwordtools --upgrade
 ```
 3. You have successfully installed it!
 
 <h4 style="color: #F9C74F; font-size: 17px;">To install or upgrade passtools on mac</h4>
-**To install passtools:**
+**To install passwordtools:**  
 1. Open terminal
 2. Run this command
 ```commandline
-pip3 install passtools
+pip3 install passwordtools
 ```
 3. You have successfully installed it!
 
-**To upgrade passtools:**
+**To upgrade passwordtools:**
 1. Open terminal
 2. Run this command
 ```commandline
-pip3 install passtools --upgrade
+pip3 install passwordtools --upgrade
 ```
 3. You have successfully upgraded it!
 
 <h4 style="color: #F9C74F; font-size: 17px;">To install or upgrade passtools on linux</h4>
-**To install passtools:**
+**To install passwordtools:**
 1. Open terminal
 2. Run this command
 ```commandline
-sudo pip3 install passtools
+sudo pip3 install passwordtools
 ```
 3. You have successfully installed it!
 
-**To upgrade passtools:**
+**To upgrade passwordtools:**
 1. Open terminal
 2. Run this command
 ```commandline
-sudo pip3 install passtools --upgrade
+sudo pip3 install passwordtools --upgrade
 ```
 3. You have successfully upgraded it!  
 
