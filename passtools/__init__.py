@@ -300,7 +300,7 @@ def passRainbowTable(hash_type:str, search_by_hash:str="", search_by_password:st
     :return: The found result in database in this syntax: (password in plain text, the hash). If no result is found, it will return false
     """
 
-    connection = sqlite3.connect(__file__[:-11]+"rainbowTableDatabase.db")
+    connection = sqlite3.connect(__file__[:-11]+"/rainbowTableDatabase.db")
     c = connection.cursor()
 
     if (search_by_password == "") and (search_by_hash == ""):
@@ -327,5 +327,3 @@ def passRainbowTable(hash_type:str, search_by_hash:str="", search_by_password:st
         return result[0]
     except Exception:
         return False
-
-password = passask(prompt="Enter your password: ", hashtype="sha224", hashstrength=3) # Echo is by default False and do_hash is by default True
