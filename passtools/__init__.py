@@ -3,8 +3,8 @@ import sys
 import hashlib
 import secrets
 
-__doc__ = "Passtools is a package that allows you to use tools with which you can do all kinds of stuff with passwords"
-__version__ = "0.1.0"
+__doc__ = "pypasstools is a package that allows you to use tools with which you can do all kinds of stuff with passwords"
+__version__ = "0.0.11"
 __author__ = "Ayaan Imran Saleem"
 
 def passhash(prompt:str, hash_type:str="sha256", hash_strength:int=1):

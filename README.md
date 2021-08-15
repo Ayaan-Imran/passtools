@@ -1,76 +1,71 @@
 # Passtools
-GitHub repo for the project "passtools" on pypi. This package allows tools that will provide you with functionality to do all kinds of stuff with passwords.
+pypasstools allows tools that will provide you with functionality to do all kinds of stuff with passwords.
 
 ## About this version
-- Version = 0.1.0
-- This version contains the very core of this package
-
-## Installing and Updating passwordtools
-### Installation process
-
-<h4 style="color: #F9C74F; font-size: 17px;">To install  or upgrade passtools on windows</h4>
-**To install passwordtools:**
+- Version = 0.0.11
+- This version contains documentation updates
+## Installing and Updating pypasstools
+Follow the installation process accroding to your OS.
+### To install or upgrade pypasstools on windows
+**To install pypasstools:**
 1. Open _cmd_ or _powershell_
 2. Run this command
 ```commandline
-pip install passwordtools
+pip install pypasstools
 ```
 3. You have successfully installed it!
 
-**To upgrade passwordtools:**
+**To upgrade pypasstools:**
 1. Open _cmd_ or _powershell_
 2. Run this command
 ```commandline
-pip install passwordtools --upgrade
+pip install pypasstools --upgrade
 ```
 3. You have successfully installed it!
 
-<h4 style="color: #F9C74F; font-size: 17px;">To install or upgrade passtools on mac</h4>
-**To install passwordtools:**  
+### To install or upgrade pypasstools on mac
+**To install pypasstools:**  
 1. Open terminal
 2. Run this command
 ```commandline
-pip3 install passwordtools
+pip3 install pypasstools
 ```
 3. You have successfully installed it!
 
-**To upgrade passwordtools:**
+**To upgrade pypasstools:**
 1. Open terminal
 2. Run this command
 ```commandline
-pip3 install passwordtools --upgrade
+pip3 install pypasstools --upgrade
 ```
 3. You have successfully upgraded it!
 
-<h4 style="color: #F9C74F; font-size: 17px;">To install or upgrade passtools on linux</h4>
-**To install passwordtools:**
+### To install or upgrade pypasstools on linux
+**To install pypasstools:**
 1. Open terminal
 2. Run this command
 ```commandline
-sudo pip3 install passwordtools
+sudo pip3 install pypasstools
 ```
 3. You have successfully installed it!
 
-**To upgrade passwordtools:**
+**To upgrade pypasstools:**
 1. Open terminal
 2. Run this command
 ```commandline
-sudo pip3 install passwordtools --upgrade
+sudo pip3 install pypasstools --upgrade
 ```
 3. You have successfully upgraded it!  
 
-<h2 style="color: #F3722C;">Documentation</h2>
-
-<h3 style="color: #F8961E; font-size: 22px;">Importing passtools</h3>
-To import passtools module, just add  this line to your python code
+## Documentation
+### Importing pypasstools
+To import pypasstools module, just add this line to your python code. As you can see, you import it with a different name
 ```python
 import passtools
 ```
-
-<h3 style="color: #F8961E; font-size: 22px;">passhash()</h3>
+### passhash()
 The `passhash()` hashes a string in a secure and fast way.
-
-<h4 style="color: #F9C74F; font-size: 17px;">Parameters</h4>
+#### Parameters
 
 |   Parameter   |   Default value  |                                                             Description                                                             | Data Type |
 |:-------------:|:----------------:|:-----------------------------------------------------------------------------------------------------------------------------------:|:---------:|
@@ -78,7 +73,7 @@ The `passhash()` hashes a string in a secure and fast way.
 | hash_type     | sha256           | The hash type of your hash.  Hash Types available: 1. sha256 2. sha1 3. sha224 4. sha384 5. sha512 6. md5                           | string    |
 | hash_strength | 1                | How strong you want your hash to be. This is done my hashing the hash in a loop. The more the strength, the more time it will take. | integer   |
 
-<h4 style="color: #F9C74F; font-size: 17px;">Code example</h4>
+#### Code example
 ```python
 import passtools
 
