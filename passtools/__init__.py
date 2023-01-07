@@ -2,12 +2,13 @@ import getpass
 import sys
 import hashlib
 import secrets
+import random
 
 __doc__ = "pypasstools is a package that allows you to use tools with which you can do all kinds of stuff with passwords"
-__version__ = "0.0.11"
+__version__ = "0.1.0"
 __author__ = "Ayaan Imran Saleem"
 
-def passhash(prompt:str, hash_type:str="sha256", hash_strength:int=1):
+def passhash(prompt: str, hash_type: str = "sha256", hash_strength: int = 1):
     """
     Function to hash a string
     :param prompt: String to hash
@@ -48,7 +49,8 @@ def passhash(prompt:str, hash_type:str="sha256", hash_strength:int=1):
 
     return hash
 
-def passask(prompt:str="password: ", do_hash:bool=True, hashtype="sha256", hashstrength:int=1, echo:bool=False):
+def passask(prompt: str = "password: ", do_hash: bool = True, hashtype="sha256", hashstrength: int = 1,
+            echo: bool = False):
     """
     Function to ask for passwords withough echoing.
     NOTE: If you use terminals like git bash or pycharm terminal, then it will echo the password. This is done because "not echoing" will cause the terminal and the whole program to crash and fail
@@ -74,7 +76,7 @@ def passask(prompt:str="password: ", do_hash:bool=True, hashtype="sha256", hashs
 
     return password
 
-def passgen(length:int = 10, caplock="mix"):
+def passgen(length: int = 10, caplock="mix"):
     """
     Function to generate strong random passwords
     :param length: The length of the password
@@ -130,7 +132,7 @@ def passgen(length:int = 10, caplock="mix"):
     # Return the result
     return final_result
 
-def passHashCracker(hash:str, wordlist:str, hash_type:str):
+def passHashCracker(hash: str, wordlist: str, hash_type: str):
     """
     Function to crack hashes using brute force
     :param hash: Hash to crack
@@ -144,14 +146,14 @@ def passHashCracker(hash:str, wordlist:str, hash_type:str):
         cracked = False
 
         with open(wordlist, "r") as wordlist_file:
-            for password in wordlist_file.readlines(): # Get each password from each line
+            for password in wordlist_file.readlines():  # Get each password from each line
                 password = password.strip("\n")
                 hashed_password = hashlib.sha256(bytes(password, "utf-8")).hexdigest()
 
-                if hashed_password == hash: # Compare the hashed password with the hash. If they match, then we have cracked it
-                    cracked_hash = password # Save the cracked password
-                    cracked = True # Tell the program that the hash has been cracked
-                    break # Get out of the loop because the hash is cracked
+                if hashed_password == hash:  # Compare the hashed password with the hash. If they match, then we have cracked it
+                    cracked_hash = password  # Save the cracked password
+                    cracked = True  # Tell the program that the hash has been cracked
+                    break  # Get out of the loop because the hash is cracked
 
     elif hash_type == "sha1":
         cracked_hash = ""
@@ -225,7 +227,7 @@ def passHashCracker(hash:str, wordlist:str, hash_type:str):
 
     return (cracked, cracked_hash)
 
-def hashFile(filename:str, hash_type:str="sha256"):
+def hashFile(filename: str, hash_type: str = "sha256"):
     """
     Function to hash a file
     :param filename: Name of a valid filename
@@ -288,3 +290,97 @@ def hashFile(filename:str, hash_type:str="sha256"):
                 hash.update(chunk)
 
     return hash.hexdigest()
+
+def encrypt(prompt:str):
+    # Define encryption key variables ==> x(an 01 b 02 c)
+    a = random.randint(1, 9)
+    b = random.randint(1, 9)
+    c = random.randint(1, 9)
+    x = random.randint(1000, 9999)
+    o1 = random.choice(["+", "-"])
+    o2 = random.choice(["+", "-"])
+
+    # Convert each letter in prompt to number and pass through encryption algorithm
+    alphabets_number_list = [letter for letter in "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"]
+    symbol_list = ['"', '#', '$', '%', "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?",
+                   "@", "[", "\\", "]", "^", "_", "`", "{", "|", "}", "~"]
+    combined_list = alphabets_number_list + symbol_list
+
+    encrypted_string = ""
+    encrypted_letter = ""
+    for i in prompt:
+        if i != " ":
+            index = combined_list.index(i) + 1
+
+            encrypted_letter = a * index
+
+            if (o1 == "+"):
+                encrypted_letter += b
+            elif (o1 == "-"):
+                encrypted_letter -= b
+
+            if (o2 == "+"):
+                encrypted_letter += c
+            elif (o2 == "-"):
+                encrypted_letter -= c
+
+            encrypted_letter *= x
+            encrypted_string += str(encrypted_letter) + ","
+
+        else:
+            encrypted_string += ":"
+
+    # Hide encryption key in the string
+    o1_string = "1" if o1 == "+" else "2"
+    o2_string = "1" if o2 == "+" else "2"
+    encrypted_string = str(x) + str(a) + str(b) + str(c) + o1_string + o2_string + "," + encrypted_string
+
+    # Clean encrypted string
+    splited_words = encrypted_string.split(":")
+    splited_words = [i[:-1] for i in splited_words]
+    encrypted_string = ":".join(splited_words)
+
+    return encrypted_string
+
+def decrypt(encrypted_promt: str):
+    # Get symbol, numbers and letters list
+    alphabets_number_list = [letter for letter in "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"]
+    symbol_list = ['"', '#', '$', '%', "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?",
+                   "@", "[", "\\", "]", "^", "_", "`", "{", "|", "}", "~"]
+    combined_list = alphabets_number_list + symbol_list
+
+    # Decrypt letter by letter
+    key = False  # Key has not been found
+    decrypted_sentence = ""
+    for word in encrypted_promt.split(":"):
+        for letter in word.split(","):
+            if key == False:
+                key = letter
+                continue  # Continue to the next word
+
+            # Variables in key
+            x = int(key[0:4])
+            a = int(key[4])
+            b = int(key[5])
+            if key[7] == "1":
+                b = b * -1  # Inverse the operator: from + to -
+            else:
+                b = (-1 * b) * -1  # Inverse the operator: from - to
+            c = int(key[6])
+            if key[7] == "1":
+                c = c * -1  # Inverse the operator: from + to -
+            else:
+                c = (-1 * c) * -1  # Inverse the operator: from - to +
+
+            # Decrypt letter
+            index = int(letter) / x
+            index += b
+            index += c
+            index /= a
+            decrypted_letter = combined_list[int(index - 1)]
+
+            # Save letter in list
+            decrypted_sentence += decrypted_letter
+        decrypted_sentence += " "
+
+    return decrypted_sentence
