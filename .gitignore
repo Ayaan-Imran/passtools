@@ -129,7 +129,5 @@ dmypy.json
 .pyre/
 
 # Personal files
-setup.py
-LICENCE
 test.py
 new_version_steps.txt
